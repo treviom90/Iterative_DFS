@@ -13,17 +13,16 @@ public class Algorithm {
     }
     
     public void runDeepeningSearch(Node startNode){
-        //profundidad o nivel al que vamos a llevar (bfs)
         int depth=0;
         //mientras no lo encontremos 
         while(!isTargetFound){
             System.out.println();
-            dfs(startNode,depth);
-            depth++;
+            iterative_dfs(startNode,depth);
+            depth++;//aumentamos profundidad 
         }
     }
 //implementamos la funcionalidad de busqueda de  profundidad 
-    private void dfs(Node startNode, int depth) {
+    private void iterative_dfs(Node startNode, int depth) {
         Stack<Node> stack = new Stack<>();
         startNode.setDepthLevel(0);
         stack.push(startNode);
@@ -39,14 +38,14 @@ public class Algorithm {
                 this.isTargetFound=true;
                 return;         
             }
-            
+            //nivel de profundidad es mayor o igual a la profundidad
             if(actualNode.getDepthLevel()>= depth ){
                 continue;
             }
             
             for(Node node : actualNode.getAdjacenciesList()){
-                node.setDepthLevel(actualNode.getDepthLevel()+1);
-                stack.push(node);
+                node.setDepthLevel(actualNode.getDepthLevel()+1);//seguimos aumentando el nivel de profunidad 
+                stack.push(node);//lo agregamos nodo a la pila 
             }
         }
     }
